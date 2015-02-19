@@ -21,7 +21,7 @@ PROMPT '.... User created with required privileges'
 PROMPT 'Connecting as Employee user'
 conn emp_user/password
 
--- Cleanup object before creating 
+-- Cleanup object before creating
 /* Uncomment when necessary */
 -- DROP TABLE department CASCADE CONSTRAINTS;
 -- DROP TABLE employee CASCADE CONSTRAINTS;
@@ -44,7 +44,7 @@ CREATE TABLE department (
 id			NUMBER(10),
 dept_name	VARCHAR(50),
 CONSTRAINT dept_pk PRIMARY KEY(id)
-) TABLESPACE ts_emp_system; 
+) TABLESPACE ts_emp_system;
 
 -- Create constraints
 ALTER TABLE department ADD CONSTRAINT dept_name_u UNIQUE(dept_name);
@@ -57,8 +57,8 @@ CREATE SEQUENCE seq_emp_id START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE;
 ALTER TABLE employee ADD (salary number(10) );
 ALTER TABLE employee ADD (dept_id NUMBER(10) );
 
--- Insert sample data
 INSERT INTO department VALUES (2001,'PRODUCTION');
+-- Insert sample data
 INSERT INTO department VALUES (2002,'SALES');
 INSERT INTO department VALUES (2003,'MARKETING');
 INSERT INTO department VALUES (2004,'SUPPORT');
@@ -77,3 +77,7 @@ INSERT INTO employee VALUES (seq_emp_id.nextval,'AAAH','ABCXX1008Z','M',99999000
 INSERT INTO employee VALUES (seq_emp_id.nextval,'AAAI','ABCXX1009Z','M',9999900010,18500,2001);
 
 COMMIT;
+
+-- SELECT COUNT(id) FROM EMPLOYEE WHERE salary>60000;
+-- SELECT COUNT(id) FROM EMPLOYEE WHERE salary>20000 AND gender='M';
+-- SELECT * FROM EMPLOYEE WHERE ROWNUM < 2;
