@@ -1,0 +1,3 @@
+CREATE SEQUENCE test_seq START WITH 1 CACHE 20;
+
+SELECT test_seq.nextval FROM DUAL;
