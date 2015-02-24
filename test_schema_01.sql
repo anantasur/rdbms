@@ -134,7 +134,26 @@ COMMIT;
 -- 	ON(E.dept_id = D.id) 
 -- 	WHERE D.dept_name NOT IN ('SALES','PRODUCTION');
 
-SELECT E.*
+/*SELECT E.*
 	FROM EMPLOYEE E JOIN department D 
 	ON(E.dept_id = D.id) 
-	WHERE D.dept_name IN ('PRODUCTION');
+	WHERE D.dept_name IN ('PRODUCTION');*/
+
+-- CREATE VIEW PRODUCTION_EMPLOYEES AS SELECT E.*
+-- 	FROM EMPLOYEE E JOIN department D 
+-- 	ON(E.dept_id = D.id) 
+-- 	WHERE D.dept_name IN ('PRODUCTION');
+
+-- GRANT CREATE VIEW TO emp_user;
+
+-- SELECT * FROM PRODUCTION_EMPLOYEES;
+
+CONNECT / AS sysdba
+DROP USER reporter;
+CREATE USER reporter IDENTIFIED BY password DEFAULT TABLESPACE ts_emp_system QUOTA UNLIMITED ON ts_emp_system;
+GRANT CREATE SESSION TO reporter;
+GRANT RESOURCE TO reporter;
+
+conn emp_user/password;
+GRANT SELECT ON PRODUCTION_EMPLOYEES TO reporter;
+
