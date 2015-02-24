@@ -75,6 +75,7 @@ INSERT INTO employee VALUES (seq_emp_id.nextval,'AAAF','ABCXX1006Z','F',99999000
 INSERT INTO employee VALUES (seq_emp_id.nextval,'AAAG','ABCXX1007Z','M',9999900008,14000,2003);
 INSERT INTO employee VALUES (seq_emp_id.nextval,'AAAH','ABCXX1008Z','M',9999900009,18500,2003);
 INSERT INTO employee VALUES (seq_emp_id.nextval,'AAAI','ABCXX1009Z','M',9999900010,18500,2001);
+INSERT INTO employee (id,name,pan_number,gender,cell_phone,salary) VALUES (seq_emp_id.nextval,'AAAJ','ABCXX1010Z','F',9999900011,19500);
 
 COMMIT;
 
@@ -85,3 +86,55 @@ COMMIT;
 -- SELECT id,ROWNUM FROM EMPLOYEE ORDER BY id;
 -- SELECT id,ROWNUM FROM EMPLOYEE ORDER BY id DESC;
 -- SELECT id,ROWNUM FROM EMPLOYEE WHERE gender='F';
+
+-- SELECT id,dept_id,name FROM EMPLOYEE;
+
+-- SELECT e.id,e.name,d.dept_name FROM EMPLOYEE e, department d WHERE e.dept_id = d.id;
+
+-- SELECT * FROM EMPLOYEE e JOIN department d ON (e.dept_id = d.id);
+
+-->CROSS JOIN<--
+-- SELECT E.id, E.name, D.dept_name FROM EMPLOYEE E, department D;
+-- SELECT E.* 
+-- 	FROM EMPLOYEE E JOIN department D 
+-- 	ON(E.dept_id = D.id) 
+-- 	WHERE D.dept_name= 'PRODUCTION';
+
+-- SELECT SUM(E.salary) 
+-- 	FROM EMPLOYEE E JOIN department D 
+-- 	ON(E.dept_id = D.id) 
+-- 	WHERE D.dept_name= 'SALES' AND E.gender = 'F';
+
+-- SELECT AVG(E.salary) 
+-- 	FROM EMPLOYEE E JOIN department D 
+-- 	ON(E.dept_id = D.id) 
+-- 	WHERE D.dept_name= 'MARKETING' AND E.gender = 'M';
+
+-- SELECT AVG(E.salary) 
+-- 	FROM EMPLOYEE E JOIN department D 
+-- 	ON(E.dept_id = D.id) 
+-- 	WHERE D.dept_name= 'MARKETING' OR D.dept_name= 'SALES';
+
+-- SELECT E.name, D.dept_name 
+--  FROM EMPLOYEE E RIGHT OUTER JOIN department D 
+--  ON(E.dept_id = D.id) ;
+
+-- SELECT E.name, D.dept_name 
+--  FROM EMPLOYEE E FULL OUTER JOIN department D 
+--  ON(E.dept_id = D.id) ;
+
+-- SELECT E.id, E.name, D.dept_name
+-- 	FROM EMPLOYEE E JOIN department D 
+-- 	ON(E.dept_id = D.id) 
+-- 	WHERE D.dept_name IN ('SALES','PRODUCTION');
+
+
+-- SELECT E.id
+-- 	FROM EMPLOYEE E JOIN department D 
+-- 	ON(E.dept_id = D.id) 
+-- 	WHERE D.dept_name NOT IN ('SALES','PRODUCTION');
+
+SELECT E.*
+	FROM EMPLOYEE E JOIN department D 
+	ON(E.dept_id = D.id) 
+	WHERE D.dept_name IN ('PRODUCTION');
