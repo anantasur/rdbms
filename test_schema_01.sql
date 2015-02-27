@@ -139,12 +139,13 @@ COMMIT;
 	ON(E.dept_id = D.id) 
 	WHERE D.dept_name IN ('PRODUCTION');*/
 
--- CREATE VIEW PRODUCTION_EMPLOYEES AS SELECT E.*
--- 	FROM EMPLOYEE E JOIN department D 
--- 	ON(E.dept_id = D.id) 
--- 	WHERE D.dept_name IN ('PRODUCTION');
+GRANT CREATE VIEW TO emp_user;
 
--- GRANT CREATE VIEW TO emp_user;
+CREATE VIEW PRODUCTION_EMPLOYEES AS SELECT E.*
+	FROM EMPLOYEE E JOIN department D 
+	ON(E.dept_id = D.id) 
+	WHERE D.dept_name IN ('PRODUCTION');
+
 
 -- SELECT * FROM PRODUCTION_EMPLOYEES;
 
@@ -157,3 +158,50 @@ GRANT RESOURCE TO reporter;
 conn emp_user/password;
 GRANT SELECT ON PRODUCTION_EMPLOYEES TO reporter;
 
+CONNECT reporter/password;
+SELECT * FROM emp_user.PRODUCTION_EMPLOYEES;
+
+CREATE SYNONYM prod_emp 
+   FOR emp_user.PRODUCTION_EMPLOYEES;
+
+--CREATE OR REPLACE VIEW
+
+--union
+-- select id,name from employee where dept_id in (2001) UNION select id,name from employee where dept_id in (2002);
+
+-- select name from PRODUCTION_EMPLOYEES 
+-- union all
+-- select name from sales_EMPLOYEES ;
+
+-- select name from PRODUCTION_EMPLOYEES 
+-- intersect
+-- select name from sales_EMPLOYEES ;
+
+-- ALTER TABLE employee ADD (MANAGER number(10) );
+
+-- ALTER TABLE employee
+-- ADD FOREIGN KEY (manager) 
+-- REFERENCES employee(id);
+
+-- select * from user_constraints;
+
+-- SELECT constraint_name,constraint_type 
+-- FROM user_constraints WHERE TABLE_NAME = 'EMPLOYEE';
+
+-- SELECT constraint_name,constraint_type 
+-- FROM user_constraints;
+
+-- ALTER TABLE employee DROP COLUMN manager;
+
+--add column manager
+@D:\_Drive\_WORKSPACE\rdbmsWorkspace\rdbms\dbscript;
+
+-- CREATE TABLE MANAGERS AS SELECT E.ID, E.NAME FROM EMPLOYEE E;
+
+-- SELECT E.ID AS EMPLOYEE_ID, E.NAME AS EMPLOYEE_NAME, M.NAME AS MANAGER_NAME FROM EMPLOYEE E JOIN EMPLOYEE M ON E.MGR_ID=M.ID ORDER BY E.ID;
+
+-- SELECT E.ID AS EMPLOYEE_ID, E.NAME AS EMPLOYEE_NAME, M.NAME AS MANAGER_NAME, D.DEPT_NAME AS DEPARTMENT
+-- FROM EMPLOYEE E ,MANAGERS M ,DEPARTMENT D WHERE E.MGR_ID=M.ID AND E.DEPT_ID = D.ID;
+
+-- SELECT E.ID AS EMPLOYEE_ID, E.NAME AS EMPLOYEE_NAME, M.NAME AS MANAGER_NAME, D.DEPT_NAME AS DEPARTMENT
+-- FROM EMPLOYEE E LEFT OUTER JOIN MANAGERS M ON (E.MGR_ID = M.ID) LEFT OUTER JOIN DEPARTMENT D ON(E.DEPT_ID = D.ID);
